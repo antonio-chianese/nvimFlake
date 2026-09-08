@@ -1,0 +1,17 @@
+---[ EXPANSION ]---
+:echo expand('%:h')
+:echo expand('%:t')
+:echo expand('%:e')
+:echo expand('%:r')
+
+---[ DIR and FILES ]---
+:cd %:h
+:edit .
+
+---[ TERMINAL ]---
+:terminal
+:vsplit term://bash
+:split term://btop
+:!ls
+:.w !sh
+:.!sh

@@ -50,24 +50,31 @@
         default = mnw.lib.wrap pkgs {
 
           neovim = pkgs.neovim-unwrapped;
-          # luaFiles = [ ./init.lua ];
+
+          initLua = builtins.readFile ./nvim/init.lua;
+
+          # luaFiles = [ ./nvim/lua ];
 
           plugins = {
             # List of plugins to load automatically
             # start = [] ++ extPlugins.start;
             start = with pkgs.vimPlugins; [
-              lazy-nvim
+              lz-n
+              # gruvbox
+              gruvbox-nvim
             ];
 
             # List of plugins to not load automatically
             # opt = [] ++ extPlugins.opt;
             opt = with pkgs.vimPlugins; [
               vimtex
+	            oil-nvim
+	            nvim-web-devicons
             ];
 
             dev.myconfig = {
               pure = ./nvim;
-              impure = "/home/antonio/neovim/nvim";
+              impure = "/home/$(whoami)/neovim/nvim";
             };
           };
 
@@ -75,7 +82,7 @@
 
     } );
 
-    # dev = forAllSystems ( system: self.packages.${system}.default.devMode );
+    dev = forAllSystems ( system: self.packages.${system}.default.devMode );
 
   };
 }

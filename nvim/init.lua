@@ -1,3 +1,8 @@
--- Map leader must be set before loading lazy!
+-- map leader must be set before loading lazy!
 vim.g.mapleader = " "
-require("plugins")
+
+-- repo: https://github.com/lumen-oss/lz.n
+require("lz.n").load("plugins")
+require("config.init")
+
+vim.cmd.colorscheme("gruvbox")
