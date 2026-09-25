@@ -60,24 +60,61 @@
             # start = [] ++ extPlugins.start;
             start = with pkgs.vimPlugins; [
               lz-n
-              # gruvbox
-              gruvbox-nvim
+              gruvbox-material
+              luasnip
+
+              # nvim-treesitter.withAllGrammars
+              (nvim-treesitter.withPlugins (p: with p; [
+                # List of plugins: https://search.nixos.org/packages?channel=unstable&sort=alpha_asc&type=packages&query=vimPlugins.nvim-treesitter-parsers
+
+                comment # highlight todos and more
+                lua
+                python
+                bash
+                nix
+
+                latex
+                typst
+
+                css
+                html
+                javascript
+
+                json
+                yaml
+                toml
+                csv
+              ]))
             ];
 
             # List of plugins to not load automatically
             # opt = [] ++ extPlugins.opt;
             opt = with pkgs.vimPlugins; [
               vimtex
+
 	            oil-nvim
 	            nvim-web-devicons
             ];
 
             dev.myconfig = {
               pure = ./nvim;
-              impure = "/home/$(whoami)/neovim/nvim";
+              impure = "/home/$(whoami)/Documents/_to-order/nvimFlake/nvim";
             };
           };
 
+          extraBinPath = with pkgs; [
+            # lsps
+            # https://langserver.org/
+            ruff
+            lua-language-server
+            texlab
+            clang-tools
+            nixd
+          ];
+
+          extraLuaPackages = p: [
+            p.jsregexp # luasnip dependency
+          ];
         };
 
     } );

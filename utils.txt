@@ -1,2 +1,0 @@
-Documentation: https://gerg-l.github.io/mnw/examples.html
-Repo: https://github.com/HeitorAugustoLN/nvim/blob/main/flake/overlays.nix
